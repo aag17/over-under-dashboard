@@ -52,6 +52,24 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+import psutil, os, streamlit as st
+
+@st.experimental_singleton  # or st.cache_resource in 1.18+
+def get_process():
+    return psutil.Process(os.getpid())
+
+def log_memory(tag=""):
+    proc = get_process()
+    rss = proc.memory_info().rss / 1024**2
+    st.sidebar.write(f"{tag} Memory: {rss:.1f} MB")
+
+# Then early in your app:
+log_memory("Start")
+# after loading df:
+log_memory("After load")
+# inside loops or callbacks:
+log_memory("Inside loop")
 # ─── Page config ───────────────────────────────────────────────────────────
 
 st.title("Over vs Under % by Book & EV Insights")
