@@ -7,9 +7,12 @@ prop, team, home/away, percent-change OM/UM, expected value (EV) insights, and
 book accuracy metrics to evaluate bookmaker calibration.
 Also allows toggling between original Over/Under counts and EV-filtered counts.
 """
+import runpy
+runpy.run_path("main/analysis_dashboard.py", run_name="__main__")
 
 # 1) Pull in Inter from Google Fonts
 import streamlit as ststrea
+
 
 import os, glob
 from datetime import date
