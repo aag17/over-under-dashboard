@@ -55,7 +55,7 @@ st.markdown(
 
 import psutil, os, streamlit as st
 
-@st.experimental_singleton  # or st.cache_resource in 1.18+
+@st.cache_resource # or st.cache_resource in 1.18+
 def get_process():
     return psutil.Process(os.getpid())
 
