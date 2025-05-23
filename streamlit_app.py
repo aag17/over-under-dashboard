@@ -1,55 +1,37 @@
 #!/usr/bin/env python3
-"""
-analysis_dashboard.py
-
-Streamlit app to show % Over vs Under by book, with filters on date, day-of-week,
-prop, team, home/away, percent-change OM/UM, expected value (EV) insights, and
-book accuracy metrics to evaluate bookmaker calibration.
-Also allows toggling between original Over/Under counts and EV-filtered counts.
-"""
-
-# 1) Pull in Inter from Google Fonts
-import streamlit as ststrea
-
+import streamlit as st
 import os, glob
 from datetime import date
-
-import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
 import plotly.express as px
-import matplotlib.pyplot as plt
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, DataReturnMode
 
-st.set_page_config(
-    page_title="Over vs Under Dashboard",
-    layout="wide"
-)
+st.set_page_config(page_title="Over vs Under Dashboard", layout="wide")
 
 # ─── Inject Google Fonts & custom CSS ───────────────────────────────────────
 st.markdown(
     """
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  /* make the entire app use Inter */
-  html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif !important;
-  }
-  /* restyle Streamlit buttons to have softer corners */
-  .stButton>button {
-    border-radius: 8px;
-  }
-  /* tweak AgGrid header to use our primaryColor bg + white text */
-  .ag-theme-streamlit .ag-header-cell-label {
-    background-color: #F37B20 !important;
-    color: #FFFFFF !important;
-  }
-  /* make the grid cells a bit darker text */
-  .ag-theme-streamlit .ag-cell {
-    color: #333333 !important;
-  }
-</style>
-""",
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      /* make the entire app use Inter */
+      html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif !important;
+      }
+      /* restyle Streamlit buttons to have softer corners */
+      .stButton>button {
+        border-radius: 8px;
+      }
+      /* tweak AgGrid header to use our primaryColor bg + white text */
+      .ag-theme-streamlit .ag-header-cell-label {
+        background-color: #F37B20 !important;
+        color: #FFFFFF !important;
+      }
+      /* make the grid cells a bit darker text */
+      .ag-theme-streamlit .ag-cell {
+        color: #333333 !important;
+      }
+    </style>
+    """,
     unsafe_allow_html=True
 )
 # ─── Page config ───────────────────────────────────────────────────────────
