@@ -26,30 +26,31 @@ st.set_page_config(
     layout="wide"
 )
 
+# ─── Inject Google Fonts & custom CSS ───────────────────────────────────────
 st.markdown(
     """
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-      /* make the entire app use Inter */
-      html, body, [class*="css"]  {
-        font-family: 'Inter', sans-serif !important;
-      }
-      /* restyle Streamlit buttons to have softer corners */
-      .stButton>button {
-        border-radius: 8px;
-      }
-      /* tweak AgGrid header to use our primaryColor bg + white text */
-      .ag-theme-streamlit .ag-header-cell-label {
-        background-color: #F37B20 !important;
-        color: #FFFFFF !important;
-      }
-      /* make the grid cells a bit darker text */
-      .ag-theme-streamlit .ag-cell {
-        color: #333333 !important;
-      }
-    </style>
-    """,
-    unsafe_allow_html=True,
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* make the entire app use Inter */
+  html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif !important;
+  }
+  /* restyle Streamlit buttons to have softer corners */
+  .stButton>button {
+    border-radius: 8px;
+  }
+  /* tweak AgGrid header to use our primaryColor bg + white text */
+  .ag-theme-streamlit .ag-header-cell-label {
+    background-color: #F37B20 !important;
+    color: #FFFFFF !important;
+  }
+  /* make the grid cells a bit darker text */
+  .ag-theme-streamlit .ag-cell {
+    color: #333333 !important;
+  }
+</style>
+""",
+    unsafe_allow_html=True
 )
 # ─── Page config ───────────────────────────────────────────────────────────
 
