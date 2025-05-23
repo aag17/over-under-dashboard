@@ -59,6 +59,11 @@ import psutil, os, streamlit as st
 def get_process():
     return psutil.Process(os.getpid())
 
+def log_memory(tag: str):
+    proc = get_process()
+    mb = proc.memory_info().rss / 1024**2
+    st.sidebar.text(f"{tag}: {mb:.0f} MB")
+
 def log_memory(tag=""):
     proc = get_process()
     rss = proc.memory_info().rss / 1024**2
@@ -67,13 +72,12 @@ def log_memory(tag=""):
 # Then early in your app:
 log_memory("Start")
 # after loading df:
-log_memory("After load")
+
 # inside loops or callbacks:
-log_memory("Inside loop")
 # ─── Page config ───────────────────────────────────────────────────────────
 
 st.title("Over vs Under % by Book & EV Insights")
-
+log_memory("Start")
 # ─── Load data ─────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
@@ -87,10 +91,12 @@ def load_data():
         book = os.path.basename(fp).split("_")[1]
         df["book"] = book
         dfs.append(df)
+    log_memory("After load")
     return pd.concat(dfs, ignore_index=True)
-
+    
 try:
     df = load_data()
+    log_memory("After load")
 except Exception as e:
     st.error(f"Failed to load data: {e}")
     st.stop()
@@ -303,6 +309,7 @@ combo_base = df_base[
 # 3) Slice into All/Home/Away, compute counts, avg odds & Book EV
 slices = []
 for loc in ['All','Home','Away']:
+    log_memory("Inside loop")
     if loc == 'All':
         df_loc = combo_base
     elif loc == 'Home':
@@ -381,6 +388,7 @@ grid_resp = AgGrid(
 import pandas as pd  # if you haven’t already
 
 # … after AgGrid …
+log_memory("after AgGrid ")
 
 # 1) grab whatever Streamlit returned (might be None, list, or DataFrame)
 selected = grid_resp.get('selected_rows')
