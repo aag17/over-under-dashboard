@@ -22,6 +22,11 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, DataReturnMode
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info("⚡️ App starting up")
+
 st.set_page_config(
     page_title="Over vs Under Dashboard",
     layout="wide"
