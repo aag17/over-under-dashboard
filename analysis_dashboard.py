@@ -393,7 +393,7 @@ else:
     (df_base['prop'] == sel_prop) &
     (df_base['outcome'].isin(['over','under'])) &
     (df_base['day_of_week'] == today_dow)
-    ]   
+    ].copy()
     if sel_loc == 'Home':
         df_sel = df_sel[df_sel['team'] == df_sel['home']]
     elif sel_loc == 'Away':
