@@ -58,7 +58,7 @@ st.title("Over vs Under % by Book & EV Insights")
 # ─── Load data ─────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    here = "/Users/ashtongill/Desktop/SummerSportsWiz/data/featuredata"
+    here = ""
     files = glob.glob(os.path.join(here, "feature_*.csv"))
     if not files:
         raise FileNotFoundError(f"No files matching {here}/feature_*.csv")
