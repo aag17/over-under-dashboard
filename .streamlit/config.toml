@@ -1,0 +1,7 @@
+[theme]
+base                     = "dark"
+primaryColor             = "#0ad0b9"   # the bright-green accent
+backgroundColor          = "#12151A"   # exact page bg
+secondaryBackgroundColor = "#1A1F2B"   # panel/card bg (just a shade up)
+textColor                = "#FFFFFF"   # pure white text
+font                     = "sans serif"  # we'll override below
