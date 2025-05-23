@@ -87,7 +87,7 @@ log_memory("Start")
 st.title("Over vs Under % by Book & EV Insights")
 log_memory("Start")
 # ─── Load data ─────────────────────────────────────────────────────────────
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_data():
     here = ""
     files = glob.glob(os.path.join(here, "feature_*.csv"))
