@@ -7,12 +7,9 @@ prop, team, home/away, percent-change OM/UM, expected value (EV) insights, and
 book accuracy metrics to evaluate bookmaker calibration.
 Also allows toggling between original Over/Under counts and EV-filtered counts.
 """
-import runpy
-runpy.run_path("Desktop/SummerSportsWiz/dashboard/analysis_dashboard.py", run_name="__main__")
 
 # 1) Pull in Inter from Google Fonts
 import streamlit as ststrea
-
 
 import os, glob
 from datetime import date
@@ -61,7 +58,7 @@ st.title("Over vs Under % by Book & EV Insights")
 # ─── Load data ─────────────────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    here = ""
+    here = "/Users/ashtongill/Desktop/SummerSportsWiz/data/featuredata"
     files = glob.glob(os.path.join(here, "feature_*.csv"))
     if not files:
         raise FileNotFoundError(f"No files matching {here}/feature_*.csv")
